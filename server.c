@@ -21,4 +21,10 @@ int	main(int argc, char **argv)
 		ft_printf("Correct syntax : ./server\n");
 	}
 	pid = getpid();
+	ft_printf("Server PID : %d\n", pid);
+	signal(SIGUSR1, handler);
+	signal(SIGURS2, handler);
+	while (42)
+		pause();
+	return (0);
 }
