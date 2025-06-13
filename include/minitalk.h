@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/13 14:12:05 by pleblond          #+#    #+#             */
-/*   Updated: 2025/06/13 14:12:05 by pleblond         ###   ########.fr       */
+/*   Created: 2025/06/13 14:14:29 by pleblond          #+#    #+#             */
+/*   Updated: 2025/06/13 14:14:29 by pleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 
-int	main(int argc, char **argv)
-{
-	int	pid;
-	
-	(void)argv;
-	if (argc != 1)
-	{
-		ft_printf("Correct syntax : ./server\n");
-	}
-	pid = getpid();
-}
+# include <signal.h>
+# include <sys/types.h>
+# include <libft.h>
