@@ -12,6 +12,13 @@
 
 #include "include/minitalk.h"
 
+char *str = NULL;
+
+static void handler(int signum)
+{
+	
+}
+
 int	main(int argc, char **argv)
 {
 	int	pid;
