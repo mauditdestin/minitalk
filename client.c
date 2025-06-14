@@ -33,10 +33,46 @@ static int	check_args(int argc, char **argv)
 	return (0);
 }
 
+static void send_int(unsigned int size, pid_t pid)
+{
+	int	i;
 
+	i = 31;
+	while (i >= 0)
+	{
+		if ((size >> 1) & 1)
+			kill(pid, SIGUSR2);
+		else
+			kill(pid, SIGUSR1);
+		i--;
+		usleep(SLEEP);
+	}
+}
+
+static void	send_str(const char *str, pid_t pid)
+{
+	return (0);
+}
 
 int main (int argc, char **argv)
 {
+	unsigned int	size;
+	pid_t		pid;
 
+	size = check_args(argc, argv);
+	if (size)
+	{
+		pid = ft_atoi(argv[1]);
+		send_int(getpid(), pid);
+		sent_int(size, pid);
+		send_str(argv[2], pid);
+		signal(SIGUSR1)
+		signal(SIGUSR2)
+		ft_printf("\n[BONUS] Waiting for server response...\n");
+		while (42)
+			pause();
+	}
+	else
+		ft_printf("Correct syntax: ./client <SERVER_PID> <TEXT>\n");
 	return (0);
 }

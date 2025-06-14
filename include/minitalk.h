@@ -15,3 +15,4 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <libft.h>
+# define SLEEP 200
