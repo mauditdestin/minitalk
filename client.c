@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "include/minitalk.h"
+
 static int	check_args(int argc, char **argv)
 {
 	int	i;
