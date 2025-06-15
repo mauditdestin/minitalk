@@ -48,7 +48,7 @@ static void	send_int(unsigned int size, pid_t pid)
 	i = 31;
 	while (i >= 0)
 	{
-		if ((size >> 1) & 1)
+		if ((size >> i) & 1)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
@@ -80,7 +80,6 @@ static void	send_str(const char *str, pid_t pid)
 		}
 		str++;
 	}
-	return (0);
 }
 
 // Gère la réponse du serveur : si SIGUSR1, succès
@@ -109,7 +108,7 @@ int	main(int argc, char **argv)
 	{
 		pid = ft_atoi(argv[1]);
 		send_int(getpid(), pid);
-		sent_int(size, pid);
+		send_int(size, pid);
 		send_str(argv[2], pid);
 		signal(SIGUSR1, client_handler);
 		signal(SIGUSR2, client_handler);

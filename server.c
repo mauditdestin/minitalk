@@ -37,6 +37,8 @@ static void	handler(int signum)
 		str_alloc(str_size, client_pid);
 		if (signum == SIGUSR2)
 			c += 1 << (7 - i);
+		next_byte(&i, &count, &c);
+		str_reset(&count, &i, &client_pid, &str_size);
 	}
 }
 

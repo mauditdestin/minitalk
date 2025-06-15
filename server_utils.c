@@ -51,3 +51,34 @@ void	get_int(int signum, int *value)
 		i = 0;
 	}
 }
+
+// Fonction qui reconstruit un caractère (1 octet) 
+// à partir de 8 bits reçus un par un.
+// Elle stocke ensuite ce caractère dans la string globale g_str.
+void	next_byte(int *i, int *count, int *c)
+{
+	if (++(*i) == 8)
+	{
+		*i = 0;
+		g_str[*count] = *c;
+		(*count)++;
+		*c = 0;
+	}
+}
+
+// Vérifie si on a reçu tous les caractères attendus, 
+// puis affiche et réinitialise tout
+void str_reset(int *count, int *i, int *client_pid, int *str_size)
+{
+	if (*count == *str_size)
+	{
+		usleep(SLEEP * 2);
+		kill(*client_pid, SIGUSR1);
+		ft_printf("%s\n", g_str);
+		free(g_str);
+		*count = 0;
+		*i = 0;
+		*client_pid = 0;
+		*str_size = 0;
+	}
+}

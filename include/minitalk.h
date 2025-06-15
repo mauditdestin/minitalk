@@ -19,3 +19,5 @@
 
 void	get_int(int signum, int *value);
 void	str_alloc(int str_size, int client_pid);
+void	next_byte(int *i, int *count, int *c);
+void	str_reset(int *count, int *i, int *client_pid, int *str_size);
