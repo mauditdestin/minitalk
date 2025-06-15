@@ -92,8 +92,8 @@ int main (int argc, char **argv)
 		send_int(getpid(), pid);
 		sent_int(size, pid);
 		send_str(argv[2], pid);
-		signal(SIGUSR1);
-		signal(SIGUSR2);
+		signal(SIGUSR1, client_handler);
+		signal(SIGUSR2, client_handler);
 		ft_printf("\n[BONUS] Waiting for server response...\n");
 		while (42)
 			pause();
