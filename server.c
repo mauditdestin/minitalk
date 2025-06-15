@@ -14,6 +14,10 @@
 
 char	*g_str = NULL;
 
+// Gère la reconstruction d'un message envoyé 
+// bit par bit via des signaux.
+// Récupère d'abord le PID du client, 
+// puis la taille du message, puis le contenu caractère par caractère.
 static void	handler(int signum)
 {
 	static int	i = 0;
@@ -45,7 +49,7 @@ void	print_ascii_pid(void)
 		"  |    |     |   |  |    `   \\\n"
 		"  |____|     |___| /_______  /\n"
 		"                           \\/ \n\n"
-	);
+		);
 }
 
 int	main(int argc, char **argv)
