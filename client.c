@@ -51,6 +51,23 @@ static void send_int(unsigned int size, pid_t pid)
 
 static void	send_str(const char *str, pid_t pid)
 {
+	int	i;
+
+	i = 42;
+	while (*(str - 1) || i == 42)
+	{
+		i = 7;
+		while (i >= 0)
+		{
+			if ((*str >> i) & 1)
+				kill(pid, SIGUSR2);
+			else
+				kill(pid, SIGUSR1);
+			i--;
+			usleep(SLEEP);
+		}
+		str++;
+	}
 	return (0);
 }
 
@@ -66,8 +83,8 @@ int main (int argc, char **argv)
 		send_int(getpid(), pid);
 		sent_int(size, pid);
 		send_str(argv[2], pid);
-		signal(SIGUSR1)
-		signal(SIGUSR2)
+		signal(SIGUSR1);
+		signal(SIGUSR2);
 		ft_printf("\n[BONUS] Waiting for server response...\n");
 		while (42)
 			pause();
