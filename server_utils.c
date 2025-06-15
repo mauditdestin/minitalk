@@ -14,6 +14,10 @@
 
 extern char *g_str;
 
+// Alloue dynamiquement la mémoire nécessaire 
+// pour stocker le message du client.
+// Si l'allocation échoue, envoie une erreur 
+// au client et quitte le programme.
 void	str_alloc(int str_size, int client_pid)
 {
 	if (g_str == NULL && str_size > 0)

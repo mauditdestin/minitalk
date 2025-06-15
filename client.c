@@ -12,6 +12,10 @@
 
 #include "include/minitalk.h"
 
+// Vérifie que le nombre d'arguments est correct et que 
+// le PID est composé uniquement de chiffres.
+// Retourne la taille de la chaîne à envoyer 
+// (+1 pour le '\0'), ou 0 si erreur.
 static int	check_args(int argc, char **argv)
 {
 	int	i;
@@ -33,6 +37,10 @@ static int	check_args(int argc, char **argv)
 	return (0);
 }
 
+// Envoie un entier (32 bits) au serveur, bit par bit, 
+//en utilisant les signaux SIGUSR1 (0) et SIGUSR2 (1).
+// Ici utilisé pour envoyer le PID du
+// client puis la taille du message à venir.
 static void send_int(unsigned int size, pid_t pid)
 {
 	int	i;
@@ -48,7 +56,10 @@ static void send_int(unsigned int size, pid_t pid)
 		usleep(SLEEP);
 	}
 }
-
+// Envoie une chaîne de caractères au serveur, 
+// caractère par caractère (8 bits chacun).
+// Continue l'envoi jusqu'à envoyer le '\0' final 
+// pour signaler la fin du message.
 static void	send_str(const char *str, pid_t pid)
 {
 	int	i;
@@ -71,6 +82,9 @@ static void	send_str(const char *str, pid_t pid)
 	return (0);
 }
 
+// Gère la réponse du serveur : si SIGUSR1, succès
+// si SIGUSR2, erreur côté serveur.
+// Affiche le résultat puis quitte le client.
 static void	client_handler(int signum)
 {
 	if (signum == SIGUSR1)
@@ -80,6 +94,9 @@ static void	client_handler(int signum)
 	exit(0);
 }
 
+// Point d’entrée du programme client. 
+// Vérifie les arguments, prépare et envoie les données au serveur.
+// Attend ensuite une réponse du serveur via signaux.
 int main (int argc, char **argv)
 {
 	unsigned int	size;
