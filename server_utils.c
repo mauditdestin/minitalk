@@ -31,3 +31,23 @@ void	str_alloc(int str_size, int client_pid)
 		}
 	}
 }
+
+// Reconstruit un entier bit par bit à 
+// chaque signal reçu (SIGUSR1 ou SIGUSR2).
+// Une fois les 32 bits reçus, stocke 
+// la valeur entière dans *value.
+void	get_int(int signum, int *value)
+{
+	static int	result = 0;
+	static int	i = 0;
+
+	if (signum == SIGUSR2)
+		result += 1 << (31 - i);
+	i++;
+	if (i == 32)
+	{
+		*value = result;
+		result = 0;
+		i = 0;
+	}
+}

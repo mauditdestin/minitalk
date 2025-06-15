@@ -26,12 +26,12 @@ static int	check_args(int argc, char **argv)
 		while (argv[1][i])
 		{
 			if (!ft_isdigit(argv[1][i]))
-					return (0);
+				return (0);
 			i++;
 		}
 		i = 0;
 		while (argv[2][i])
-				i++;
+			i++;
 		return (i + 1);
 	}
 	return (0);
@@ -41,7 +41,7 @@ static int	check_args(int argc, char **argv)
 //en utilisant les signaux SIGUSR1 (0) et SIGUSR2 (1).
 // Ici utilisé pour envoyer le PID du
 // client puis la taille du message à venir.
-static void send_int(unsigned int size, pid_t pid)
+static void	send_int(unsigned int size, pid_t pid)
 {
 	int	i;
 
@@ -60,6 +60,7 @@ static void send_int(unsigned int size, pid_t pid)
 // caractère par caractère (8 bits chacun).
 // Continue l'envoi jusqu'à envoyer le '\0' final 
 // pour signaler la fin du message.
+
 static void	send_str(const char *str, pid_t pid)
 {
 	int	i;
@@ -97,10 +98,11 @@ static void	client_handler(int signum)
 // Point d’entrée du programme client. 
 // Vérifie les arguments, prépare et envoie les données au serveur.
 // Attend ensuite une réponse du serveur via signaux.
-int main (int argc, char **argv)
+
+int	main(int argc, char **argv)
 {
 	unsigned int	size;
-	pid_t		pid;
+	pid_t			pid;
 
 	size = check_args(argc, argv);
 	if (size)

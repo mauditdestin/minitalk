@@ -12,7 +12,10 @@
 
 #pragma once
 
-# include <signal.h>
-# include <sys/types.h>
-# include <libft.h>
-# define SLEEP 200
+#include <signal.h>
+#include <sys/types.h>
+#include "libft.h"
+#define SLEEP 200
+
+void	get_int(int signum, int *value);
+void	str_alloc(int str_size, int client_pid);

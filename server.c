@@ -9,26 +9,42 @@
 /*   Updated: 2025/06/13 14:12:05 by pleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "include/minitalk.h"
 
-char *g_str = NULL;
+char	*g_str = NULL;
 
-static void handler(int signum)
+static void	handler(int signum)
 {
-	
+	static int	i = 0;
+	static int	client_pid = 0;
+	static int	str_size = 0;
+	static int	count = 0;
+	static int	c = 0;
+
+	if (count == 0 && i == 0)
+		g_str = NULL;
+	if (client_pid == 0)
+		get_int(signum, &client_pid);
+	else if (str_size == 0)
+		get_int(signum, &str_size);
+	else
+	{
+		str_alloc(str_size, client_pid);
+		if (signum == SIGUSR2)
+			c += 1 << (7 - i);
+	}
 }
 
-void	print_ascii_header(void)
+void	print_ascii_pid(void)
 {
 	ft_printf(
-		"   _____     ______     _____     __      __    ______     _____                    _____      _____     _____  \n"
-		"  / ____|   |  ____|   |  __ \\    \\ \\    / /   |  ____|   |  __ \\                  |  __ \\    |_   _|   |  __ \\ \n"
-		" | (___     | |__      | |__) |    \\ \\  / /    | |__      | |__) |                 | |__) |     | |     | |  | |\n"
-		"  \\___ \\    |  __|     |  _  /      \\ \\/ /     |  __|     |  _  /                  |  ___/      | |     | |  | |\n"
-		"  ____) |   | |____    | | \\ \\       \\  /      | |____    | | \\ \\                  | |         _| |_    | |__| |\n"
-		" |_____/    |______|   |_|  \\_\\       \\/       |______|   |_|  \\_\\                 |_|        |_____|   |_____/ \n"
-		"                                                                                                                \n"
-		"                                                                                                                \n"
+		" __________  .___  ________   \n"
+		" \\______   \\ |   | \\______ \\  \n"
+		"  |     ___/ |   |  |    |  \\ \n"
+		"  |    |     |   |  |    `   \\\n"
+		"  |____|     |___| /_______  /\n"
+		"                           \\/ \n\n"
 	);
 }
 
@@ -43,8 +59,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	pid = getpid();
-	print_ascii_header();
-	ft_printf("🚀 Server PID : %d 🚀\n\n", pid);
+	print_ascii_pid();
+	ft_printf("🚀 PID : %d 🚀\n\n", pid);
 	signal(SIGUSR1, handler);
 	signal(SIGUSR2, handler);
 	while (42)
