@@ -71,6 +71,15 @@ static void	send_str(const char *str, pid_t pid)
 	return (0);
 }
 
+static void	client_handler(int signum)
+{
+	if (signum == SIGUSR1)
+		ft_printf("----> Successfully wrote on the server!\n");
+	else if (signum == SIGUSR2)
+		ft_printf("----> Error : Server closed.\n");
+	exit(0);
+}
+
 int main (int argc, char **argv)
 {
 	unsigned int	size;
