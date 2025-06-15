@@ -10,3 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "include/minitalk.h"
+
+extern char *g_str;
+
+void	str_alloc(int str_size, int client_pid)
+{
+	if (g_str == NULL && str_size > 0)
+	{
+		g_str = malloc(str_size * sizeof(char));
+		if (!g_str)
+		{
+			kill(client_pid, SIGUSR1);
+			free(g_str);
+			exit(0);
+		}
+	}
+}

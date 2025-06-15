@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "include/minitalk.h"
 
-char *str = NULL;
+char *g_str = NULL;
 
 static void handler(int signum)
 {
