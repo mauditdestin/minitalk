@@ -12,7 +12,7 @@
 
 #include "include/minitalk.h"
 
-extern char *g_str;
+extern char	*g_str;
 
 // Alloue dynamiquement la mémoire nécessaire 
 // pour stocker le message du client.
@@ -68,7 +68,7 @@ void	next_byte(int *i, int *count, int *c)
 
 // Vérifie si on a reçu tous les caractères attendus, 
 // puis affiche et réinitialise tout
-void str_reset(int *count, int *i, int *client_pid, int *str_size)
+void	str_reset(int *count, int *i, int *client_pid, int *str_size)
 {
 	if (*count == *str_size)
 	{
